@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Proyecto 2 - E-Commerce Integral</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .card-img-top {
+            height: 280px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-4">
+
+        <!-- Miga de Pan -->
+        <nav aria-label="breadcrumb">
+
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item">
+                    <a href="#">Inicio</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                    <a href="#">Tecnología</a>
+                </li>
+
+                <li class="breadcrumb-item active" aria-current="page">
+                    Laptops
+                </li>
+
+            </ol>
+
+        </nav>
+
+
+        <!-- Alerta Promocional -->
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+            <strong>¡Gran Descuento!</strong>
+
+            Usa el código <strong>BOOTSTRAP2026</strong>
+            para obtener un 20% de descuento en tu primera compra.
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close">
+            </button>
+
+        </div>
+
+
+        <!-- Botones tipo radio -->
+        <div class="d-flex justify-content-center mb-4">
+
+            <div class="btn-group"
+                 role="group"
+                 aria-label="Filtro de categorías">
+
+                <input type="radio"
+                       class="btn-check"
+                       name="btnradio"
+                       id="btnradio1"
+                       autocomplete="off"
+                       checked>
+
+                <label class="btn btn-outline-primary"
+                       for="btnradio1">
+                    Todos
+                </label>
+
+
+                <input type="radio"
+                       class="btn-check"
+                       name="btnradio"
+                       id="btnradio2"
+                       autocomplete="off">
+
+                <label class="btn btn-outline-primary"
+                       for="btnradio2">
+                    Laptops
+                </label>
+
+
+                <input type="radio"
+                       class="btn-check"
+                       name="btnradio"
+                       id="btnradio3"
+                       autocomplete="off">
+
+                <label class="btn btn-outline-primary"
+                       for="btnradio3">
+                    Accesorios
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- Catálogo de productos -->
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+
+
+            <!-- Producto 1 -->
+            <div class="col">
+
+                <div class="card border-primary h-100 shadow-sm">
+
+                    <div class="card-header bg-primary text-white text-center">
+                        Oferta Especial
+                    </div>
+
+                    <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=2500&q=90"
+                         class="card-img-top"
+                         alt="Laptop Gaming RTX">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+
+                            Laptop Gaming RTX
+
+                            <span class="badge bg-danger ms-2">
+                                -15%
+                            </span>
+
+                        </h5>
+
+                        <p class="card-text">
+                            El equipo definitivo para jugar y streamear sin interrupciones.
+                        </p>
+
+
+                        <!-- Lista de especificaciones -->
+                        <ul class="list-group list-group-flush mb-3">
+
+                            <li class="list-group-item">
+                                Procesador Intel Core i9
+                            </li>
+
+                            <li class="list-group-item">
+                                32GB RAM DDR5
+                            </li>
+
+                            <li class="list-group-item">
+                                1TB SSD NVMe
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="card-footer text-center bg-light">
+
+                        <div class="d-grid gap-2">
+
+                            <button class="btn btn-success"
+                                    type="button">
+
+                                Comprar Ahora - $1,499
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Producto 2 -->
+            <div class="col">
+
+                <div class="card border-secondary h-100 shadow-sm">
+
+                    <div class="card-header bg-secondary text-white text-center">
+                        Más Vendido
+                    </div>
+
+                    <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=2500&q=90"
+                         class="card-img-top"
+                         alt="Tablet Pro">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+
+                            Tablet Pro 12"
+
+                            <span class="badge bg-warning text-dark ms-2">
+                                Nuevo
+                            </span>
+
+                        </h5>
+
+                        <p class="card-text">
+                            Perfecta para diseñadores gráficos y tomar notas en la universidad.
+                        </p>
+
+
+                        <!-- Lista de especificaciones -->
+                        <ul class="list-group list-group-flush mb-3">
+
+                            <li class="list-group-item">
+                                Pantalla Liquid Retina
+                            </li>
+
+                            <li class="list-group-item">
+                                Batería de 12 horas
+                            </li>
+
+                            <li class="list-group-item">
+                                Lápiz óptico incluido
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="card-footer text-center bg-light">
+
+                        <div class="d-grid gap-2">
+
+                            <button class="btn btn-primary"
+                                    type="button">
+
+                                Comprar Ahora - $799
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Sueldo Neto Perú 2026 | AFP + Impuesto a la Renta</title>
+  <meta name="description" content="Calcula tu sueldo neto en Perú. Descuenta AFP, Impuesto a la Renta 5ta categoría. Actualizado 2026." />
+  <style>
+    :root {
+      --bg: #0c1222;
+      --surface: #141c2e;
+      --surface-2: #1c2740;
+      --surface-3: #243052;
+      --border: #2e3d5c;
+      --text: #f0f4fc;
+      --muted: #8b9dc3;
+      --blue: #4f8cff;
+      --blue-dim: rgba(79, 140, 255, 0.15);
+      --cyan: #22d3ee;
+      --green: #34d399;
+      --green-dim: rgba(52, 211, 153, 0.15);
+      --red: #f87171;
+      --red-dim: rgba(248, 113, 113, 0.12);
+      --orange: #fb923c;
+      --purple: #a78bfa;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Fondo con formas de color */
+    .bg-shapes {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+      animation: float 18s ease-in-out infinite;
+    }
+
+    .shape-1 {
+      width: 420px; height: 420px;
+      background: #1e3a8a;
+      top: -120px; left: -100px;
+      animation-delay: 0s;
+    }
+
+    .shape-2 {
+      width: 350px; height: 350px;
+      background: #0f766e;
+      top: 40%; right: -120px;
+      animation-delay: -6s;
+    }
+
+    .shape-3 {
+      width: 280px; height: 280px;
+      background: #5b21b6;
+      bottom: -80px; left: 30%;
+      animation-delay: -12s;
+    }
+
+    .shape-4 {
+      width: 200px; height: 200px;
+      background: #1d4ed8;
+      top: 20%; left: 50%;
+      opacity: 0.25;
+      animation-delay: -3s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -40px) scale(1.05); }
+      66% { transform: translate(-20px, 25px) scale(0.95); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1.1rem 3.5rem;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 1.75rem;
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: linear-gradient(135deg, var(--blue-dim), rgba(34, 211, 238, 0.1));
+      border: 1px solid rgba(79, 140, 255, 0.3);
+      color: var(--cyan);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    header h1 {
+      font-size: clamp(1.55rem, 4.5vw, 2.15rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #e0e7ff, #67e8f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Top bar actions */
+    .top-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.6s ease-out 0.1s both;
+    }
+
+    .icon-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+
+    .icon-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-dim);
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      animation: fadeUp 0.55s ease-out both;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.12s; }
+    .card:nth-child(2) { animation-delay: 0.22s; }
+
+    .card h2 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text);
+    }
+
+    .card h2 .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 8px var(--blue);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+      font-weight: 500;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap .prefix {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 0.88rem;
+      pointer-events: none;
+      font-weight: 600;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 0.72rem 0.9rem;
+      color: var(--text);
+      font-size: 0.98rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    input.has-prefix {
+      padding-left: 2.15rem;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-dim);
+      background: var(--surface-3);
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .hint {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.28rem;
+      opacity: 0.85;
+    }
+
+    /* Resultado */
+    .result-main {
+      text-align: center;
+      padding: 1.1rem 0 0.4rem;
+      position: relative;
+    }
+
+    .result-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .result-value {
+      font-size: clamp(1.85rem, 6vw, 2.55rem);
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 0 24px rgba(52, 211, 153, 0.35);
+      transition: transform 0.2s ease;
+    }
+
+    .result-value.pop {
+      animation: pop 0.35s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.06); }
+      100% { transform: scale(1); }
+    }
+
+    .breakdown {
+      margin-top: 1.15rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.9rem;
+    }
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.48rem 0.6rem;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+
+    .breakdown-row:hover {
+      background: var(--surface-2);
+    }
+
+    .breakdown-row .label {
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .breakdown-row .value {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .breakdown-row.negative .value {
+      color: var(--red);
+    }
+
+    .breakdown-row.total {
+      background: var(--green-dim);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      margin-top: 0.55rem;
+      padding: 0.7rem 0.75rem;
+      font-size: 1rem;
+    }
+
+    .breakdown-row.total .label {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .breakdown-row.total .value {
+      color: var(--green);
+      font-size: 1.15rem;
+    }
+
+    .info-box {
+      margin-top: 1rem;
+      background: linear-gradient(135deg, var(--surface-2), var(--surface-3));
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .info-box strong {
+      color: var(--text);
+    }
+
+    /* Bancos afiliados */
+    .banks-section {
+      margin-top: 1.5rem;
+      animation: fadeUp 0.55s ease-out 0.35s both;
+    }
+
+    .banks-section h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .banks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .bank-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 0.85rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bank-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(79,140,255,0.08));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .bank-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(79, 140, 255, 0.15);
+    }
+
+    .bank-card:hover::before {
+      opacity: 1;
+    }
+
+    .bank-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: white;
+    }
+
+    .bank-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .bank-cta {
+      font-size: 0.7rem;
+      color: var(--blue);
+      font-weight: 600;
+      position: relative;
+    }
+
+    /* Modal configuración */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 12, 24, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.5rem;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.25s ease;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+
+    .modal-overlay.open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: grid;
+      place-items: center;
+      transition: all 0.15s;
+    }
+
+    .modal-close:hover {
+      color: var(--red);
+      border-color: var(--red);
+    }
+
+    .modal .form-group {
+      margin-bottom: 0.9rem;
+    }
+
+    .modal label {
+      font-size: 0.78rem;
+    }
+
+    .bank-config-item {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .bank-config-item .name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .bank-config-item input {
+      font-size: 0.88rem;
+      padding: 0.55rem 0.75rem;
+    }
+
+    .save-btn {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+    }
+
+    .save-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(59, 130, 246, 0.45);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--green);
+      color: #064e3b;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0.7rem 1.25rem;
+      border-radius: 10px;
+      z-index: 200;
+      opacity: 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(52, 211, 153, 0.4);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      animation: fadeUp 0.5s ease-out 0.4s both;
+    }
+
+    .disclaimer {
+      font-size: 0.7rem;
+      color: #5a6d8f;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Formas de fondo animadas -->
+  <div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
+
+  <div class="container">
+    <div class="top-actions">
+      <button class="icon-btn" id="configBtn" title="Configurar afiliados">⚙️</button>
+    </div>
+
+    <header>
+      <div class="badge">● Actualizado 2026</div>
+      <h1>Calculadora de Sueldo Neto</h1>
+      <p>Descubre cuánto recibes realmente después de AFP e Impuesto a la Renta</p>
+    </header>
+
+    <div class="grid">
+      <!-- Entrada -->
+      <div class="card">
+        <h2><span class="dot"></span> Datos de tu sueldo</h2>
+
+        <div class="form-group">
+          <label for="bruto">Sueldo bruto mensual</label>
+          <div class="input-wrap">
+            <span class="prefix">S/</span>
+            <input type="number" id="bruto" class="has-prefix" value="2500" min="0" step="50" />
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="form-group">
+            <label for="afp">AFP / ONP</label>
+            <select id="afp">
+              <option value="12.5">AFP (≈12.5%)</option>
+              <option value="13">ONP (13%)</option>
+              <option value="0">Sin descuento</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="uit">UIT 2026</label>
+            <div class="input-wrap">
+              <span class="prefix">S/</span>
+              <input type="number" id="uit" class="has-prefix" value="5350" min="1000" step="50" />
+            </div>
+            <p class="hint">Valor UIT vigente</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="meses">Meses trabajados en el año</label>
+          <input type="number" id="meses" value="12" min="1" max="12" step="1" />
+        </div>
+
+        <div class="form-group">
+          <label for="otros">Otros ingresos anuales (opcional)</label>
+          <div class="input-wrap">
+            <span class="prefix">S/</span>
+            <input type="number" id="otros" class="has-prefix" value="0" min="0" step="100" />
+          </div>
+          <p class="hint">Grati, bonos, utilidades…</p>
+        </div>
+
+        <div class="form-group">
+          <label for="deducciones">Deducciones extras anuales</label>
+          <div class="input-wrap">
+            <span class="prefix">S/</span>
+            <input type="number" id="deducciones" class="has-prefix" value="0" min="0" step="100" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Resultados -->
+      <div class="card">
+        <h2><span class="dot" style="background:var(--green);box-shadow:0 0 8px var(--green)"></span> Resultado</h2>
+
+        <div class="result-main">
+          <div class="result-label">Sueldo neto mensual</div>
+          <div class="result-value" id="neto">S/ 0.00</div>
+        </div>
+
+        <div class="breakdown">
+          <div class="breakdown-row">
+            <span class="label">Sueldo bruto</span>
+            <span class="value" id="r-bruto">S/ 0.00</span>
+          </div>
+          <div class="breakdown-row negative">
+            <span class="label">AFP / ONP</span>
+            <span class="value" id="r-afp">- S/ 0.00</span>
+          </div>
+          <div class="breakdown-row negative">
+            <span class="label">Impuesto a la Renta</span>
+            <span class="value" id="r-renta">- S/ 0.00</span>
+          </div>
+          <div class="breakdown-row total">
+            <span class="label">Neto a recibir</span>
+            <span class="value" id="r-neto">S/ 0.00</span>
+          </div>
+        </div>
+
+        <div class="info-box" id="infoBox"></div>
+      </div>
+    </div>
+
+    <!-- Bancos recomendados (afiliados) -->
+    <div class="banks-section">
+      <h3>🏦 Abre tu cuenta sueldo y recibe más beneficios</h3>
+      <div class="banks-grid" id="banksGrid">
+        <!-- se llena por JS -->
+      </div>
+    </div>
+
+    <footer>
+      Calculadora orientativa · 5ta categoría · Perú 2026<br>
+      <div class="disclaimer">
+        Los valores son aproximados. El descuento real de AFP depende de tu fondo.
+        Esta herramienta no reemplaza una liquidación oficial de planilla.
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal de configuración de afiliados -->
+  <div class="modal-overlay" id="configModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>⚙️ Configurar afiliados</h3>
+        <button class="modal-close" id="closeModal">✕</button>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.1rem;">
+        Pega aquí tus links de afiliado. Se guardan en este navegador.
+      </p>
+
+      <div id="configList">
+        <!-- se llena por JS -->
+      </div>
+
+      <button class="save-btn" id="saveConfig">Guardar cambios</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">✓ Configuración guardada</div>
+
+  <script>
+    // ========== BANCOS POR DEFECTO ==========
+    const DEFAULT_BANKS = [
+      {
+        id: 'interbank',
+        name: 'Interbank',
+        color: '#00a651',
+        initials: 'IB',
+        url: 'https://interbank.pe',
+        cta: 'Abrir cuenta'
+      },
+      {
+        id: 'bcp',
+        name: 'BCP',
+        color: '#002a8d',
+        initials: 'BCP',
+        url: 'https://www.viabcp.com',
+        cta: 'Ver beneficios'
+      },
+      {
+        id: 'bbva',
+        name: 'BBVA',
+        color: '#072146',
+        initials: 'BBVA',
+        url: 'https://www.bbva.pe',
+        cta: 'Abrir cuenta'
+      },
+      {
+        id: 'scotiabank',
+        name: 'Scotiabank',
+        color: '#ec111a',
+        initials: 'SB',
+        url: 'https://www.scotiabank.com.pe',
+        cta: 'Conocer más'
+      }
+    ];
+
+    // ========== ESTADO ==========
+    let banks = loadBanks();
+
+    function loadBanks() {
+      try {
+        const saved = localStorage.getItem('sueldo_neto_banks');
+        if (saved) return JSON.parse(saved);
+      } catch (e) {}
+      return JSON.parse(JSON.stringify(DEFAULT_BANKS));
+    }
+
+    function saveBanks() {
+      localStorage.setItem('sueldo_neto_banks', JSON.stringify(banks));
+    }
+
+    // ========== DOM ==========
+    const $ = id => document.getElementById(id);
+
+    function format(n) {
+      return 'S/ ' + n.toLocaleString('es-PE', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    // ========== CÁLCULO ==========
+    function calcularRentaAnual(rentaNetaAnual, uit) {
+      const deduccion7UIT = 7 * uit;
+      let base = Math.max(0, rentaNetaAnual - deduccion7UIT);
+
+      const tramos = [
+        { hasta: 5 * uit,  tasa: 0.08 },
+        { hasta: 20 * uit, tasa: 0.14 },
+        { hasta: 35 * uit, tasa: 0.17 },
+        { hasta: 45 * uit, tasa: 0.20 },
+        { hasta: Infinity, tasa: 0.30 }
+      ];
+
+      let impuesto = 0;
+      let anterior = 0;
+
+      for (const t of tramos) {
+        if (base <= anterior) break;
+        const tramo = Math.min(base, t.hasta) - anterior;
+        impuesto += tramo * t.tasa;
+        anterior = t.hasta;
+      }
+      return impuesto;
+    }
+
+    function calcular() {
+      const bruto = parseFloat($('bruto').value) || 0;
+      const afpPct = parseFloat($('afp').value) || 0;
+      const uit = parseFloat($('uit').value) || 5350;
+      const meses = parseFloat($('meses').value) || 12;
+      const otros = parseFloat($('otros').value) || 0;
+      const deduccionesExtra = parseFloat($('deducciones').value) || 0;
+
+      const descuentoPrevisional = bruto * (afpPct / 100);
+      const baseMensual = bruto - descuentoPrevisional;
+      const rentaAnualAprox = (baseMensual * meses) + otros - deduccionesExtra;
+      const impuestoAnual = calcularRentaAnual(rentaAnualAprox, uit);
+      const impuestoMensual = impuestoAnual / (meses || 12);
+      const neto = bruto - descuentoPrevisional - impuestoMensual;
+
+      const netoEl = $('neto');
+      netoEl.textContent = format(Math.max(0, neto));
+      netoEl.classList.remove('pop');
+      void netoEl.offsetWidth;
+      netoEl.classList.add('pop');
+
+      $('r-bruto').textContent = format(bruto);
+      $('r-afp').textContent = '- ' + format(descuentoPrevisional);
+      $('r-renta').textContent = '- ' + format(Math.max(0, impuestoMensual));
+      $('r-neto').textContent = format(Math.max(0, neto));
+
+      const tasaEfectiva = bruto > 0 ? ((descuentoPrevisional + impuestoMensual) / bruto * 100) : 0;
+      $('infoBox').innerHTML = `
+        <strong>Resumen anual</strong><br>
+        Renta neta estimada: ${format(rentaAnualAprox)}<br>
+        Impuesto anual: ${format(impuestoAnual)} · 
+        Descuento total: <strong style="color:var(--orange)">${tasaEfectiva.toFixed(1)}%</strong>
+      `;
+    }
+
+    // ========== BANCOS UI ==========
+    function renderBanks() {
+      const grid = $('banksGrid');
+      grid.innerHTML = banks.map(b => `
+        <a class="bank-card" href="${b.url}" target="_blank" rel="noopener sponsored">
+          <div class="bank-logo" style="background:${b.color}">${b.initials}</div>
+          <div class="bank-name">${b.name}</div>
+          <div class="bank-cta">${b.cta} →</div>
+        </a>
+      `).join('');
+    }
+
+    function renderConfigForm() {
+      const list = $('configList');
+      list.innerHTML = banks.map((b, i) => `
+        <div class="bank-config-item">
+          <div class="name">
+            <span style="width:12px;height:12px;border-radius:3px;background:${b.color};display:inline-block"></span>
+            ${b.name}
+          </div>
+          <div class="form-group" style="margin-bottom:0.5rem">
+            <label>Link de afiliado</label>
+            <input type="url" data-index="${i}" data-field="url" value="${b.url}" placeholder="https://..." />
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>Texto del botón</label>
+            <input type="text" data-index="${i}" data-field="cta" value="${b.cta}" placeholder="Abrir cuenta" />
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ========== MODAL ==========
+    const modal = $('configModal');
+
+    $('configBtn').addEventListener('click', () => {
+      renderConfigForm();
+      modal.classList.add('open');
+    });
+
+    $('closeModal').addEventListener('click', () => {
+      modal.classList.remove('open');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('open');
+    });
+
+    $('saveConfig').addEventListener('click', () => {
+      const inputs = $('configList').querySelectorAll('input');
+      inputs.forEach(inp => {
+        const idx = parseInt(inp.dataset.index);
+        const field = inp.dataset.field;
+        banks[idx][field] = inp.value.trim() || banks[idx][field];
+      });
+      saveBanks();
+      renderBanks();
+      modal.classList.remove('open');
+
+      const toast = $('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    });
+
+    ['bruto', 'afp', 'uit', 'meses', 'otros', 'deducciones'].forEach(id => {
+      $(id).addEventListener('input', calcular);
+      $(id).addEventListener('change', calcular);
+    });
+
+    // Init
+    renderBanks();
+    calcular();
+  </script>
+</body>
+</html>

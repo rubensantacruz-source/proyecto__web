@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio 1: FORMULARIOS</title>
+    <link rel="stylesheet" href="plantilla/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container py-4">
+        <h1>Checkbox y Radio</h1>
+        <h2>Checkbox</h2>
+        <form action="">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkbox1">
+                <label class="form-check-label" for="checkbox1">Un input de tipo checkbox1</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkbox1" checked>
+                <label class="form-check-label" for="checkbox1">Un input de tipo checkbox1</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkbox1" disabled>
+                <label class="form-check-label" for="checkbox1">Un input de tipo checkbox1</label>
+            </div>
+        </form>
+        <!--h2{Radio}-->
+        <h2>Radio</h2>
+        <form action="">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="prueba" id="radio1" checked>
+                <label class="form-check-label" for="radio1">Input de tipo radio1</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="prueba" id="radio2">
+                <label class="form-check-label" for="radio2">Input de tipo radio2</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="prueba" id="radio3" disabled>
+                <label class="form-check-label" for="radio3">Input de tipo radio1</label>
+            </div>
+        </form>
+
+    </div>
+
+    <script src="plantilla/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
